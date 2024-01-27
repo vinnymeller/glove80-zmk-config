@@ -1,0 +1,6 @@
+[submodule "zmk"]
+	path = zmk
+	url = git@github.com:vinnymeller/zmk
+[submodule "zmk-nodefree-config"]
+	path = zmk-nodefree-config
+	url = git@github.com:vinnymeller/zmk-nodefree-config
