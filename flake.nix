@@ -14,18 +14,19 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};
-      config = ./config;
+      # config = ./config;
+      config = ./.;
       firmware = import ./zmk {inherit pkgs;};
 
       glove80_left = firmware.zmk.override {
         board = "glove80_lh";
-        keymap = "${config}/glove80.keymap";
-        kconfig = "${config}/glove80.conf";
+        keymap = "${config}/config/glove80.keymap";
+        kconfig = "${config}/config/glove80.conf";
       };
       glove80_right = firmware.zmk.override {
         board = "glove80_rh";
-        keymap = "${config}/glove80.keymap";
-        kconfig = "${config}/glove80.conf";
+        keymap = "${config}/config/glove80.keymap";
+        kconfig = "${config}/config/glove80.conf";
       };
     in {
       defaultPackage = firmware.combine_uf2 glove80_left glove80_right;
