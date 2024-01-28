@@ -9,12 +9,13 @@
   outputs = {
     self,
     flake-utils,
-    # nixpkgs,
+    nixpkgs,
+    ...
   }:
     flake-utils.lib.eachDefaultSystem (system: let
-      # pkgs = import nixpkgs {inherit system;};
-      config = ./.;
-      firmware = import ./zmk {};
+      pkgs = import nixpkgs {inherit system;};
+      config = ./config;
+      firmware = import ./zmk {inherit pkgs;};
 
       glove80_left = firmware.zmk.override {
         board = "glove80_lh";
