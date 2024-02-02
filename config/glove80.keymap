@@ -16,7 +16,7 @@
 #define KEYS_R RN0 RN1 RN2 RN3 RN4 RN5 RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5
 #define KEYS_T LH5 LH4 LH3 LH2 LH1 LH0 RH0 RH1 RH2 RH3 RH4 RH5
 
-#define HM_TAPPING_TERM 300
+#define HM_TAPPING_TERM 250
 #define HM_TAPPING_TERM_FAST 200
 #define REQUIRE_IDLE_PRIOR_MS_FAST 125
 #define REQUIRE_IDLE_PRIOR_MS_SLOW 175
@@ -30,6 +30,7 @@
 #define MAGIC 2
 #define GAME 3
 #define CLMKDH 4
+#define EMGRM 5
 
 / {
     behaviors {
@@ -62,7 +63,6 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM>;
             quick-tap-ms = <175>;                // repeat on tap-into-hold
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_R KEYS_T>;
             hold-trigger-on-release;             // requires PR #1423
@@ -76,7 +76,6 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM>;
             quick-tap-ms = <175>;
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_L KEYS_T>;
             hold-trigger-on-release;             // requires PR #1423
@@ -94,7 +93,6 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM_FAST>;
             quick-tap-ms = <175>;
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_R KEYS_T>;
             // hold-trigger-on-release;             // requires PR #1423
@@ -108,7 +106,6 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM_FAST>;
             quick-tap-ms = <175>;
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_L KEYS_T>;
             // hold-trigger-on-release;             // requires PR #1423
@@ -121,7 +118,6 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM>;
             quick-tap-ms = <175>;
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_R KEYS_T>;
             hold-trigger-on-release;             // requires PR #1423
@@ -134,10 +130,29 @@
             flavor = "balanced";
             tapping-term-ms = <HM_TAPPING_TERM>;
             quick-tap-ms = <175>;
-            // global-quick-tap-ms = <150>;         // requires PR #1387
 	    require-prior-idle-ms =  <REQUIRE_IDLE_PRIOR_MS_FAST>;
             hold-trigger-key-positions = <KEYS_L KEYS_T>;
             hold-trigger-on-release;             // requires PR #1423
+        };
+
+	lt_t_r: layer_tap_thumb_right {
+	    compatible = "zmk,behavior-hold-tap";
+	    #binding-cells = <2>;
+	    bindings = <&mo>, <&kp>;
+	    flavor = "balanced";
+	    tapping-term-ms = <HM_TAPPING_TERM>;
+	    quick-tap-ms = <150>;
+	    hold-trigger-on-release;
+	};
+
+	lt_t_l: layer_tap_thumb_left {
+	    compatible = "zmk,behavior-hold-tap";
+	    #binding-cells = <2>;
+	    bindings = <&mo>, <&kp>;
+	    flavor = "balanced";
+	    tapping-term-ms = <HM_TAPPING_TERM>;
+	    quick-tap-ms = <150>;
+	    hold-trigger-on-release;
         };
     };
 
@@ -192,7 +207,7 @@
         default_layer {
             bindings = <
 // ╭────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────╮                                                                                                                                                                           ╭────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────╮
-    &none                &none                &none                &tog CLMKDH          &tog GAME                                                                                                                                                                                        &none                &none                &none                &none                &none
+    &none                &none                &none                &tog CLMKDH          &tog GAME                                                                                                                                                                                        &none                &none                &none                &none                &magic MAGIC 0
 // ├────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┼────────────────────╮                                                                                                                                 ╭────────────────────┼────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┤
     &kp EQUAL            &kp N1               &kp N2               &kp N3               &kp N4               &kp N5                                                                                                                                                 &kp N6               &kp N7               &kp N8               &kp N9               &kp N0               &kp MINUS
 // ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤                                                                                                                                 ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
@@ -202,7 +217,7 @@
 // ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┴────────────────────┤╭────────────────────┬────────────────────┬────────────────────╮ ╭────────────────────┬────────────────────┬────────────────────╮├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
     &kp LSHFT            &kp Z                &kp X                &kp C                &lt_l LOWER V        &hm_l LC(LA(LGUI)) B  &kp LCTRL            &kp LALT             &none                  &kp HYPER            &kp LC(LA(LGUI))     &kp LC(LALT)          &hm_r LC(LA(LGUI)) N &lt_r LOWER M        &kp COMMA            &kp DOT              &kp FSLH             &none
 // ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────╯├────────────────────┼────────────────────┼────────────────────┤ ├────────────────────┼────────────────────┼────────────────────┤╰────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
-    &magic MAGIC 0       &mo LOWER            &none                &kp LEFT             &kp RIGHT                                  &kp SPACE            &kp BSPC             &mo LOWER              &mo LOWER            &kp TAB              &kp ENTER                                  &kp UP               &kp DOWN             &none                &mo LOWER            &magic MAGIC 0
+    &mo LOWER            &mo LOWER            &none                &kp LEFT             &kp RIGHT                                  &kp SPACE            &kp BSPC             &mo LOWER              &mo LOWER            &kp TAB              &lt_t_r LOWER ENTER                        &kp UP               &kp DOWN             &none                &mo LOWER            &magic MAGIC 0
 // ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────╯ ╰────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯
             >;
         };
@@ -269,6 +284,24 @@ magic_layer {
     ___                  &kp Z                &kp X                &kp C                &lt_l LOWER D        &hm_l LC(LA(LGUI))    ___                  ___                  ___                    ___                  ___                  ___                   &hm_r LC(LA(LGUI)) K &lt_r LOWER H        ___                  ___                  ___                  ___                
 // ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────╯├────────────────────┼────────────────────┼────────────────────┤ ├────────────────────┼────────────────────┼────────────────────┤╰────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
     ___                  ___                  ___                  ___                  ___                                        ___                  ___                  ___                    ___                  ___                  ___                                        ___                  ___                  ___                  ___                  ___      
+// ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────╯ ╰────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯
+            >;
+        };
+
+        engrammer_symbol_layer {
+            bindings = <
+// ╭────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────╮                                                                                                                                                                           ╭────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────╮
+    ___                  ___                  ___                  ___                  ___                                                                                                                                                                                              ___                  ___                  ___                  ___                  ___
+// ├────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┼────────────────────╮                                                                                                                                 ╭────────────────────┼────────────────────┬────────────────────┬────────────────────┬────────────────────┬────────────────────┤
+    ___                  &kp GRAVE            &kp LPAR             &kp RPAR             &kp SEMI             &kp COMMA                                                                                                                                              ___                  ___                  ___                  ___                  ___                  ___                
+// ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤                                                                                                                                 ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+    &kp EXCLAMATION      &kp LBRC             &kp SINGLE_QUOTE     &kp DOUBLE_QUOTES    &kp RBRC             &kp QUESTION                                                                                                                                           &kp SEMI             &kp LCTRL            &kp LSHIFT           &kp LALT             &kp LGUI              ___                
+// ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤							 									   ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+    &kp HASH             &kp CARET            &kp EQUAL            &kp UNDERSCORE       &kp DOLLAR           &kp STAR                							                            						    &kp DOT              &kp BACKSPACE        &kp TAB              &kp SPACE            &kp ENTER            ___                
+// ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┴────────────────────┤╭────────────────────┬────────────────────┬────────────────────╮ ╭────────────────────┬────────────────────┬────────────────────╮├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+    &kp TILDE            &kp LESS_THAN        &kp PIPE             &kp MINUS            &kp GREATER_THAN     &kp SLASH             &kp BACKSLASH        &kp DOT              &kp STAR               ___                  ___                  ___                   &kp SLASH            &kp DELETE           &kp LS(TAB)          ___                  ___                  ___                
+// ├────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────╯├────────────────────┼────────────────────┼────────────────────┤ ├────────────────────┼────────────────────┼────────────────────┤╰────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+    &kp AT               &kp AMPS             &kp LBKT             &kp RBKT             &kp PLUS                                   &kp PERCENT          &kp COLON            &kp SEMICOLON          ___                  ___                  ___                                        &kp LPAR             &kp LBKT             &kp RBKT             &kp RPAR             ___      
 // ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────╯ ╰────────────────────┴────────────────────┴────────────────────╯                     ╰────────────────────┴────────────────────┴────────────────────┴────────────────────┴────────────────────╯
             >;
         };
