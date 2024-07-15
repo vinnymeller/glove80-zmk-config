@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-nix build '.?submodules=1' -o combined
+nix build '.?submodules=1' -o combined --verbose
