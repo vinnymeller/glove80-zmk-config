@@ -1,6 +1,8 @@
-{pkgs ? import <nixpkgs> {}}: let
-  # firmware = import ../src {};
-  firmware = import ../zmk {};
+{
+  pkgs ? import <nixpkgs> { },
+  firmware ? import ../zmk { },
+}:
+let
   config = ./.;
 
   glove80_left = firmware.zmk.override {
@@ -14,4 +16,4 @@
     kconfig = "${config}/glove80.conf";
   };
 in
-  firmware.combine_uf2 glove80_left glove80_right
+firmware.combine_uf2 glove80_left glove80_right
