@@ -5,11 +5,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
         "type": "github"
       },
       "original": {
@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1720768451,
-        "narHash": "sha256-EYekUHJE2gxeo2pM/zM9Wlqw1Uw2XTJXOSAO79ksc4Y=",
+        "lastModified": 1749285348,
+        "narHash": "sha256-frdhQvPbmDYaScPFiCnfdh3B/Vh81Uuoo0w5TkWmmjU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7e7c39ea35c5cdd002cd4588b03a3fb9ece6fad9",
+        "rev": "3e3afe5174c561dee0df6f2c2b2236990146329f",
         "type": "github"
       },
       "original": {
@@ -37,7 +37,9 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zmk": "zmk",
+        "zmk-helpers": "zmk-helpers"
       }
     },
     "systems": {
@@ -52,6 +54,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zmk": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743221471,
+        "narHash": "sha256-fg6gyVu42YyOxsNFcTOIaM8TdmdOiZVlLGmFufhvfjI=",
+        "owner": "moergo-sc",
+        "repo": "zmk",
+        "rev": "598b03508c308de2139c61216eb1b2fdc447501e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "moergo-sc",
+        "repo": "zmk",
+        "type": "github"
+      }
+    },
+    "zmk-helpers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746108333,
+        "narHash": "sha256-5se3Vmu9Q190cj4xeEbylYLCqdLm3ymZfHQZ3Fsz+C8=",
+        "owner": "urob",
+        "repo": "zmk-helpers",
+        "rev": "4b6f4597fec3c216151dd93ed1f9e9350f275701",
+        "type": "github"
+      },
+      "original": {
+        "owner": "urob",
+        "repo": "zmk-helpers",
         "type": "github"
       }
     }
