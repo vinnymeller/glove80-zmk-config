@@ -2,3 +2,4 @@
 combined
 result
 *.uf2
+.direnv/

@@ -8,8 +8,6 @@ To build the firmware run either:
 ./build.sh
 ```
 
-or
+Current keymap:
 
-```
-nix build .# -o combined --verbose
-```
+![Keymap](./keymap.svg)
