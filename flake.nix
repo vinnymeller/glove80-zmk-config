@@ -57,10 +57,11 @@
                 checkKeymap = pkgs.writeShellScriptBin "update-keymap-svg" ''
                   mv keymap.svg keymap.svg.bak || true
                   ${keymap} parse -z config/glove80.keymap | ${keymap} draw - > keymap.svg
-                  cmp_result=$(cmp keymap.svg keymap.svg.bak && echo 0 || echo 1)
-                  rm keymap.svg.bak || true
+                  cmp -s keymap.svg keymap.svg.bak
+                  cmp_result=$?
+                  rm keymap.svg.bak
                   if [ "$cmp_result" -ne 0 ]; then
-                    echo "Keymap SVG has changed, please update it."
+                    echo "Keymap SVG has changed. Please stage the new file."
                     exit 1
                   fi
                 '';
