@@ -3,3 +3,4 @@ combined
 result
 *.uf2
 .direnv/
+.pre-commit-config.yaml
